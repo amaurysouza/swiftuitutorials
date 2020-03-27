@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct LandmarkDetail: View {
+    var landmark: Landmark
     var body: some View {
         VStack {
-            MapView()
+            MapView(coordinate: landmark.locationCoordinate)
                 .frame(height:300)
                 .edgesIgnoringSafeArea(.top)
-            CircleImage()
+            CircleImage(image: landmark.image)
                 .offset(y: -130)
                 .padding(.bottom, -130)
             VStack(alignment: .leading){
@@ -31,12 +32,12 @@ struct LandmarkDetail: View {
             Spacer()
         }
         
-            
+        .navigationBarTitle(Text(landmark.name), displayMode: .inline)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkDetail()
+        LandmarkDetail(landmark: landmarkData[0])
     }
 }
